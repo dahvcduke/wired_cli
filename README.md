@@ -25,14 +25,16 @@ python wired_cli.py --help
 
 ## Usage example: Here are the questions one can answer with WiredCLI
 
-### What documents are like this document?
-### What are keywords from this document?
-### What is a summary of this document?
-### What documents are like this topic?
-### What is the answer to this question about said documents?
-### What are the facts from this document?
-### What are the facts from this group of document?
-### How polarized is this document?
+## Complete :white_check_mark: -- In Progress :so:
+
+### What documents are like this document? :white_check_mark:
+### What are keywords from this document? :white_check_mark:
+### What is a summary of this document? :white_check_mark:
+### What are the facts from this document? :white_check_mark:
+### What documents are like this topic? :o:
+### What is the answer to this question about said documents? :o:
+### What are the facts from this group of document? :o:
+### How polarized is this document? :o:
 
 _For more examples and usage, please refer to the [Wiki][wiki]._
 
