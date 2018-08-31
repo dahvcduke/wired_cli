@@ -3,7 +3,7 @@ from setuptools import setup
 setup(
     name='wired_cli',
     version='1.4',
-    py_modules=['reporter-cli'],
+    py_modules=['wired_cli'],
     include_package_data=True,
     install_requires=[
         'click',

@@ -1,0 +1,10 @@
+click
+tqdm
+tabulate
+gensim
+pandas
+emoji
+spacy
+newspaper3k
+PyInquirer
+pyfiglet

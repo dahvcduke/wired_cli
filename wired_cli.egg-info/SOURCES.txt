@@ -1,0 +1,9 @@
+README.md
+setup.py
+wired_cli.py
+wired_cli.egg-info/PKG-INFO
+wired_cli.egg-info/SOURCES.txt
+wired_cli.egg-info/dependency_links.txt
+wired_cli.egg-info/entry_points.txt
+wired_cli.egg-info/requires.txt
+wired_cli.egg-info/top_level.txt
