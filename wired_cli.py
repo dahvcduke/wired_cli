@@ -65,6 +65,42 @@ def cli(ctx, document):
 pass_document = click.make_pass_decorator(Document)
 
 
+def open_data(directory):
+    # Folder containing all papers.
+    data_dir = directory
+    files = os.listdir(data_dir)
+    for filen in files:
+        if not filen.startswith('.'):
+            with open(data_dir + '/' + filen, errors='ignore') as fid:
+                txt = fid.read().replace('\n', '')
+            docs.append(txt)
+            titles.append(filen)
+    return titles, docs
+
+def create_dataframes(directory):
+    open_data(directory)
+    doc_text = pd.DataFrame({"text": docs})
+    doc_titles = pd.DataFrame({"titles": titles})
+    dataframe = pd.concat([doc_text,doc_titles], axis=1)
+    return dataframe
+
+def read_corpus(documents):
+    for i, text in enumerate(documents):
+        yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(text), [i])
+
+def create_clusters(dv_model, num_clusters):
+    df = pd.DataFrame()
+    doc_vectors = model.docvecs.doctag_syn0
+    kmeans_clustering = KMeans( n_clusters = num_clusters )
+    idx = kmeans_clustering.fit_predict( doc_vectors )
+    word_centroid_list = list(zip(model.docvecs.offset2doctag, idx))
+    word_centroid_list_sort = sorted(word_centroid_list, key=lambda el: el[1], reverse=False)
+    
+    for word_centroid in word_centroid_list_sort:
+        line = word_centroid[0] + '\t' + str(word_centroid[1]) + '\n'
+        d.append({'author': word_centroid[0], 'category': word_centroid[1]})
+
+
 def read_corpus(documents):
     for i, plot in enumerate(documents):
         yield gensim.models.doc2vec.TaggedDocument(gensim.utils.simple_preprocess(plot, max_len=30), [i])
@@ -220,6 +256,18 @@ def ner(document):
     people_df = pd.DataFrame({"people": people})
     people_table = tabulate(people_df, headers=[answers['ner']], tablefmt="fancy_grid") 
     click.echo(people_table)
+
+@cli.command()
+@click.option('--path', prompt='Your Folder', help='ex. document_1.txt -- the document that you would like to query')
+def doc_compare(path):
+    dataframe = create_dataframes(path)
+    train_corpus = list(read_corpus(dataframe.text))
+    model = gensim.models.doc2vec.Doc2Vec(size=50, min_count=2, iter=55)
+    model.build_vocab(train_corpus)
+    model.train(train_corpus, total_examples=model.corpus_count, epochs=model.iter)
+    model.save_word2vec_format('doc_tensor_wedland_documents.w2v', doctag_vec=True, word_vec=False)
+    click.echo(model.docvecs.most_similar(positive=[2], topn=10))
+    create_cluset
     
 if __name__ == '__main__':
     cli()
