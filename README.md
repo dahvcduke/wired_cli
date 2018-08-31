@@ -25,7 +25,7 @@ python wired_cli.py --help
 
 ## Usage example: Here are the questions one can answer with WiredCLI
 
-## Complete :white_check_mark: -- In Progress :so:
+## Complete :white_check_mark: -- In Progress :o:
 
 ### What documents are like this document? :white_check_mark:
 ### What are keywords from this document? :white_check_mark:
