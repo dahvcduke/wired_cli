@@ -13,7 +13,6 @@ setup(
         'pandas',
         'emoji',
         'spacy',
-        'newspaper3k',
         'PyInquirer',
         'pyfiglet'
     ],

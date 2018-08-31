@@ -25,8 +25,6 @@ from gensim.summarization import keywords
 
 import pandas as pd
 
-from newspaper import Article
-
 tabulate.PRESERVE_WHITESPACE = True
 
 from PyInquirer import style_from_dict, Token, prompt, Separator
