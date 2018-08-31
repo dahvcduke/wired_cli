@@ -10,9 +10,7 @@ This is a CLI for Document aggregation and analysis. This CLI allows users to qu
 
 OS X & Linux:
 
-```sh
-pip install wired_cli
-```
+#### in progress...
 
 ## Development
 
