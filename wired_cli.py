@@ -99,10 +99,8 @@ def train(document):
     Train a new model
     """
     
-    article = Article(document)
-    article.download()
-    article.parse()
-    doc = nlp(article.text)
+    document_text = click.open_file(document, errors='ignore').read().replace('\n', '').replace('\t', '')
+    doc = nlp(document_text)
     sentences = [sent.string.strip() for sent in doc.sents]
     
     articledf = pd.DataFrame({"sentence": sentences})
@@ -129,10 +127,8 @@ def quote(document, input_sentence):
     """
     Find a quote in the document
     """
-    article = Article(document)
-    article.download()
-    article.parse()
-    doc = nlp(article.text)
+    document_text = click.open_file(document, errors='ignore').read().replace('\n', '').replace('\t', '')
+    doc = nlp(document_text)
     sentences = [sent.string.strip() for sent in doc.sents]
     
     articledf = pd.DataFrame({"sentence": sentences})
@@ -151,14 +147,10 @@ def summary(document):
     """
     Get a summary of the document 
     """
-    article = Article(document)
-    article.download()
-    article.parse()
-    article_text = article.text.replace('\n', '').replace('\t', '')
-
+    document_text = click.open_file(document, errors='ignore').read().replace('\n', '').replace('\t', '')
 
     click.echo('....Performing Inference {}'.format(emoji.emojize(':boom:', use_aliases=True)))
-    summary_text = summarize(str(article_text))
+    summary_text = summarize(str(document_text))
     click.echo("")
     click.echo("")
     click.echo(summary_text)
@@ -171,13 +163,10 @@ def words(document):
     """
     List the keywords in the document
     """
-    article = Article(document)
-    article.download()
-    article.parse()
-    article_text = article.text.replace('\n', '').replace('\t', '')
+    document_text = click.open_file(document, errors='ignore').read().replace('\n', '').replace('\t', '')
 
     click.echo('....Performing Inference {}'.format(emoji.emojize(':boom:', use_aliases=True)))
-    document_keywords = keywords(article_text).split('\n')
+    document_keywords = keywords(document_text).split('\n')
     keywords_df = pd.DataFrame({"keywords": document_keywords})
     keywords_table = tabulate(keywords_df, headers=['keyword'], tablefmt="fancy_grid") 
     click.echo(keywords_table)
@@ -192,13 +181,9 @@ def info(document):
     info_nlp = spacy.load('en_core_web_lg')
     click.secho('.........ready! {}'.format(emoji.emojize(':rocket:', use_aliases=True)), fg='green')
     
-    article = Article(document)
-    article.download()
-    article.parse()
-    article_text = article.text.replace('\n', '').replace('\t', '')
+    document_text = click.open_file(document, errors='ignore').read().replace('\n', '').replace('\t', '')
+    doc = nlp(document_text)
 
-
-    doc = info_nlp(document_text)
     statements = textacy.extract.semistructured_statements(doc, "{}".format(query))
 
     click.echo("Here are the things I know about {}:".format(query))
@@ -213,10 +198,7 @@ def ner(document):
     """
     List people in the document
     """
-    article = Article(document)
-    article.download()
-    article.parse()
-    article_text = article.text.replace('\n', '').replace('\t', '')
+    document_text = click.open_file(document, errors='ignore').read().replace('\n', '').replace('\t', '')
 
 
     questions = [
