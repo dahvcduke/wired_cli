@@ -20,8 +20,7 @@ OS X & Linux:
 python wired_cli.py --help
 ```
 
-
-## Usage example: Here are the questions one can answer with WiredCLI
+## Usage example: Here are the questions one can answer with WiredCLI:
 
 #### Complete :white_check_mark: -- In Progress :small_red_triangle_down:
 
