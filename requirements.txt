@@ -33,7 +33,7 @@ pprint==0.1
 preshed==1.0.1
 prompt-toolkit==1.0.14
 pyfiglet==0.7.5
-Pygments==2.2.0
+Pygments==2.7.4
 PyInquirer==1.0.2
 python-dateutil==2.7.3
 pytz==2018.5
